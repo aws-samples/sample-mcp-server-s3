@@ -1,0 +1,25 @@
+# Smithery configuration file: https://smithery.ai/docs/config#smitheryyaml
+
+startCommand:
+  type: stdio
+  configSchema:
+    # JSON Schema defining the configuration options for the MCP.
+    type: object
+    required:
+      - awsAccessKeyId
+      - awsSecretAccessKey
+      - awsRegion
+    properties:
+      awsAccessKeyId:
+        type: string
+        description: AWS access key ID.
+      awsSecretAccessKey:
+        type: string
+        description: AWS secret access key.
+      awsRegion:
+        type: string
+        description: AWS region for S3.
+  commandFunction:
+    # A function that produces the CLI command to start the MCP on stdio.
+    |-
+    (config) => ({command: 's3-mcp-server', env: {AWS_ACCESS_KEY_ID: config.awsAccessKeyId, AWS_SECRET_ACCESS_KEY: config.awsSecretAccessKey, AWS_REGION: config.awsRegion}})
