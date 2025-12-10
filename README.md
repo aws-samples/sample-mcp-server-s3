@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/aws-samples-sample-mcp-server-s3-badge.png)](https://mseep.ai/app/aws-samples-sample-mcp-server-s3)
+
 # Sample S3 Model Context Protocol Server
 
 An MCP server implementation for retrieving  data such as PDF's from S3.
