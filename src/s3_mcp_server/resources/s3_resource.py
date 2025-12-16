@@ -31,6 +31,14 @@ class S3Resource:
             read_timeout=60,
             max_pool_connections=50
         )
+        self.client_config = {
+            'verify': False,
+            'endpoint_url': os.getenv('AWS_ENDPOINT_URL') or None,
+            'config': Config(
+                signature_version='s3v4',
+                s3={'addressing_style': 'path'}
+            )
+        }
 
         self.session = aioboto3.Session()
         self.region_name = region_name
@@ -67,7 +75,7 @@ class S3Resource:
         """
         List S3 buckets using async client with pagination
         """
-        async with self.session.client('s3', region_name=self.region_name) as s3:
+        async with self.session.client('s3', region_name=self.region_name, **self.client_config) as s3:
             if self.configured_buckets:
                 # If buckets are configured, only return those
                 response = await s3.list_buckets()
@@ -109,7 +117,7 @@ class S3Resource:
             logger.warning(f"list_objects failed! Bucket {bucket_name} not in configured bucket list")
             return []
 
-        async with self.session.client('s3', region_name=self.region_name) as s3:
+        async with self.session.client('s3', region_name=self.region_name, **self.client_config) as s3:
             response = await s3.list_objects_v2(
                 Bucket=bucket_name,
                 Prefix=prefix,
@@ -137,7 +145,8 @@ class S3Resource:
             try:
                 async with self.session.client('s3',
                                                region_name=self.region_name,
-                                               config=self.config) as s3:
+                                               config=self.config, 
+                                               **self.client_config) as s3:
 
                     # Get the object and its stream
                     response = await s3.get_object(Bucket=bucket_name, Key=key)
