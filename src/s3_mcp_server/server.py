@@ -3,7 +3,7 @@ from importlib.resources import contents
 
 import boto3
 from mcp.server.models import InitializationOptions
-from mcp.server import NotificationOptions, Server, McpError
+from mcp.server import NotificationOptions, Server
 import mcp.server.stdio
 from dotenv import load_dotenv
 import logging
