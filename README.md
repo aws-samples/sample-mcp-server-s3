@@ -2,6 +2,10 @@
 
 An MCP server implementation for retrieving  data such as PDF's from S3.
 
+<a href="https://glama.ai/mcp/servers/@aws-samples/sample-mcp-server-s3">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@aws-samples/sample-mcp-server-s3/badge" alt="Sample S3 Server MCP server" />
+</a>
+
 ## Features
 ### Resources
 Expose AWS S3 Data through **Resources**. (think of these sort of like GET endpoints; they are used to load information into the LLM's context). Currently only **PDF** documents supported and limited to **1000** objects.
