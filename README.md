@@ -1,4 +1,5 @@
 # Sample S3 Model Context Protocol Server
+[![smithery badge](https://smithery.ai/badge/s3-mcp-server)](https://smithery.ai/server/s3-mcp-server)
 
 An MCP server implementation for retrieving  data such as PDF's from S3.
 
